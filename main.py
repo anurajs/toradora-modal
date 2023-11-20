@@ -1,18 +1,15 @@
 import datetime
 from os import environ
 import requests
-from dotenv import load_dotenv
 import modal
 
 stub = modal.Stub("toradora-webhook")
-image = modal.Image.debian_slim().pip_install_from_requirements("./requirements.txt")
-
-load_dotenv()
+image = modal.Image.debian_slim().pip_install(["requests"])
 
 
 @stub.function(
     schedule=modal.Cron("50 17 6-31 12 *"),
-    secret=modal.Secret.from_name("toradora-private-secrets"),
+    secret=modal.Secret.from_name("toradora-webhook-secrets"),
     image=image,
 )
 def execute_hook():
