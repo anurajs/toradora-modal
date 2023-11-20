@@ -2,9 +2,12 @@ import datetime
 from os import environ
 import requests
 import modal
+from dotenv import load_dotenv
+
+load_dotenv()
 
 stub = modal.Stub("toradora-webhook")
-image = modal.Image.debian_slim().pip_install(["requests"])
+image = modal.Image.debian_slim().pip_install_from_requirements("./requirements.txt")
 
 
 @stub.function(
