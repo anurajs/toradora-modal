@@ -12,7 +12,7 @@ load_dotenv()
 
 @stub.function(
     schedule=modal.Cron("50 17 6-31 12 *"),
-    secret=modal.Secret.from_name("toradora-webhook-secrets"),
+    secret=modal.Secret.from_name("toradora-private-secrets"),
     image=image,
 )
 def execute_hook():
