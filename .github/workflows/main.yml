@@ -28,4 +28,4 @@ jobs:
 
       - name: Deploy job
         run: |
-          modal deploy --name toradora-reminder toradora-reminder/main.py
+          modal deploy --name toradora-reminder toradora-modal/main.py
