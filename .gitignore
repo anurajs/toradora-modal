@@ -5,3 +5,4 @@ lib
 .vscode
 __pycache__
 pyvenv.cfg
+venv
