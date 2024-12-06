@@ -6,11 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-stub = modal.Stub("toradora-webhook")
+App = modal.App("toradora-webhook")
 image = modal.Image.debian_slim().pip_install_from_requirements("./requirements.txt")
 
 
-@stub.function(
+@App.function(
     schedule=modal.Cron("50 17 6-31 12 *"),
     secret=modal.Secret.from_name("toradora-webhook-secrets"),
     image=image,
@@ -28,6 +28,6 @@ def execute_hook():
     requests.post(url, body)
 
 
-@stub.local_entrypoint()
+@App.local_entrypoint()
 def main():
     execute_hook.remote()
